@@ -1,15 +1,7 @@
-import Button from "@/components/ui/Button";
-import Form from "@/components/ui/Form";
 import { useEffect, useState } from "react";
-import Input from "@/components/ui/Input";
-import Card from "@/components/ui/Card";
 import List from "@/components/ui/List";
 
 function Home() {
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-
-    // list
     const [list, setList] = useState([]);
 
     useEffect(() => {
@@ -18,28 +10,14 @@ function Home() {
             .then((data) => setList(data));
     }, []);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log(username, password);
-    };
-
     return (
-        <div className="flex flex-col gap-4">
-            {/* form */}
-            <h1>Form Data</h1>
-            <Form onSubmit={handleSubmit}>
-                <Input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-                <Button type="submit">Click me</Button>
-            </Form>
-
+        <div className="flex flex-col gap-4 p-4 border border-gray-300 rounded w-1/2 mx-auto my-4">
             {/* list */}
-            <h2>List Data</h2>
-            <List className="flex flex-col gap-4">
-                {list.map((item) => (
-                    <Card key={item.id} title={item.title} description={item.body} />
-                ))}
-            </List>
+            <h2 className="text-2xl font-bold">List Data</h2>
+            <List
+                list={list}
+                className="bg-white p-4 rounded-2xl shadow-inner"
+            />
         </div>
     );
 }
