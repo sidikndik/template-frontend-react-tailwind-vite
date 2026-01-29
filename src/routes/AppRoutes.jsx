@@ -15,8 +15,8 @@ function AppRoutes() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/add-post" element={<AddPost />} />
-                <Route path="/update-post" element={<UpdatePost />} />
-                <Route path="/delete-post" element={<DeletePost />} />
+                <Route path="/update-post/:id" element={<UpdatePost />} />
+                <Route path="/delete-post/:id" element={<DeletePost />} />
                 <Route path="/list-post" element={<ListPost />} />
             </Routes>
         </Router>

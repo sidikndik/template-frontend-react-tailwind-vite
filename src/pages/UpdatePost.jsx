@@ -3,8 +3,10 @@ import { updatePost } from "@/api/post.api";
 import Button from "@/components/ui/Button";
 import Form from "@/components/ui/Form";
 import Input from "@/components/ui/Input";
+import { useParams } from "react-router-dom";
 
 function UpdatePost() {
+    const { id } = useParams();
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [message, setMessage] = useState("");
@@ -13,10 +15,11 @@ function UpdatePost() {
 
     {/* handle submit update post */ }
     const handleSubmit = async (e) => {
+        console.log(id);
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await updatePost(1, { title, body, userId: 1 });
+            const response = await updatePost(id, { title, body, userId: 1 });
             setResponseData(response);
         } catch (error) {
             console.log(error);
