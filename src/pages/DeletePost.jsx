@@ -1,44 +1,41 @@
 import { useState } from "react";
-import { createPost } from "@/api/post.api";
+import { deletePost } from "@/api/post.api";
 import Button from "@/components/ui/Button";
 import Form from "@/components/ui/Form";
 import Input from "@/components/ui/Input";
 
-function AddPost() {
-    const [title, setTitle] = useState("");
-    const [body, setBody] = useState("");
+function DeletePost() {
+    const [id, setId] = useState("");
     const [message, setMessage] = useState("");
     const [responseData, setResponseData] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    {/* handle submit create post */ }
+    {/* handle submit delete post */ }
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
         try {
-            const response = await createPost({ title, body, userId: 1 });
+            const response = await deletePost(id);
             setResponseData(response);
         } catch (error) {
             console.log(error);
         } finally {
             setLoading(false);
-            setTitle("");
-            setBody("");
-            setMessage("Post created successfully");
+            setId("");
+            setMessage("Post deleted successfully");
         }
     }
 
     return (
         <div className="flex flex-col gap-4 p-4 border border-gray-300 rounded w-1/2 mx-auto my-4">
             {/* form */}
-            <h1 className="text-2xl font-bold">Add Post</h1>
+            <h1 className="text-2xl font-bold">Delete Post</h1>
             <Form onSubmit={handleSubmit}>
-                <Input type="text" placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)} />
-                <Input type="text" placeholder="Body" value={body} onChange={(e) => setBody(e.target.value)} />
-                <Button type="submit" disabled={loading}>{loading ? "Loading..." : "Add Post"}</Button>
+                <Input type="text" placeholder="ID" value={id} onChange={(e) => setId(e.target.value)} />
+                <Button type="submit" disabled={loading}>{loading ? "Loading..." : "Delete Post"}</Button>
             </Form>
 
-            {/* message success create post */}
+            {/* message success delete post */}
             <div className="text-green-500">{message}</div>
 
             {/* response data */}
@@ -53,4 +50,4 @@ function AddPost() {
         </div>
     );
 }
-export default AddPost;
+export default DeletePost;      

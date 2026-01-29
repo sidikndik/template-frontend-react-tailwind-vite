@@ -8,6 +8,11 @@ export const getPostById = (id) => {
   return fetcher(`/posts/${id}`);
 };
 
+export const filterPost = (params) => {
+  const query = new URLSearchParams(params).toString();
+  return fetcher(`/posts?${query}`);
+};
+
 export const createPost = (post) => {
   return fetcher(`/posts`, {
     method: "POST",
