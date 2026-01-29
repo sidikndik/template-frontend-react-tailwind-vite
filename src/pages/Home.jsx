@@ -3,6 +3,7 @@ import LoaderModal from "@/components/ui/Loarder";
 import useFetch from "@/hooks/useFetch";
 import { getPost } from "@/api/post.api";
 
+
 function Home() {
   const { data: posts, isLoading, error } = useFetch(getPost);
 
